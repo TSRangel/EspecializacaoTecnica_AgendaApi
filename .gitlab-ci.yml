@@ -1,35 +1,32 @@
 stages:
   - build
-  - test
-  - scan
+  - deploy
 
 variables:
-  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"
-  GIT_DEPTH: "0"
-
-cache:
-  paths:
-    - .sonar/cache
-
-before_script:
-  - choco install openjdk11 --params 'installdir=c:\\java\\openjdk11' -y # Instala o OpenJDK 11 usando Chocolatey
-  - SET "JAVA_HOME=c:\java\openjdk11" # Define o JAVA_HOME para o OpenJDK 11
-  - SET "PATH=%JAVA_HOME%\bin;%PATH%" # Adiciona o OpenJDK 11 ao PATH
-  - dotnet tool install --global dotnet-sonarscanner
+  DOCKER_IMAGE: $CI_REGISTRY_IMAGE
 
 build:
   stage: build
+  image: docker:latest
+  services:
+    - docker:dind
   script:
-    - dotnet build --configuration Release
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+    - docker build -t $DOCKER_IMAGE:$CI_COMMIT_SHA .
+    - docker push $DOCKER_IMAGE:$CI_COMMIT_SHA
+    - docker tag $DOCKER_IMAGE:$CI_COMMIT_SHA $DOCKER_IMAGE:latest
+    - docker push $DOCKER_IMAGE:latest
+  only:
+    - main
 
-test:
-  stage: test
+deploy:
+  stage: deploy
+  image: amazon/aws-cli
   script:
-    - dotnet test --configuration Release --no-build
-
-sonarqube-check:
-  stage: scan
-  script:
-    - dotnet sonarscanner begin /k:"jno868214_agendaapp-backend" /o:"jno868214" /d:sonar.login="${SONAR_TOKEN}" /d:sonar.host.url="https://sonarcloud.io"
-    - dotnet build --configuration Release
-    - dotnet sonarscanner end /d:sonar.login="${SONAR_TOKEN}"
+    - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+    - export AWS_DEFAULT_REGION=us-east-1
+    - export IMAGE_TAG=$DOCKER_IMAGE:$CI_COMMIT_SHA
+    - aws ecs update-service --cluster $AWS_ECS_CLUSTER_NAME --service $AWS_ECS_SERVICE_NAME --force-new-deployment
+  only:
+    - main

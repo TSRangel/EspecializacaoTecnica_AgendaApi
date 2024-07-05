@@ -18,7 +18,7 @@ namespace AgendaApi.Application.Shared.TokenServices
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = GenerateClaims(response),
-                Expires = DateTime.UtcNow.AddHours(3),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = credentials
             };
             var token = handler.CreateToken(tokenDescriptor);

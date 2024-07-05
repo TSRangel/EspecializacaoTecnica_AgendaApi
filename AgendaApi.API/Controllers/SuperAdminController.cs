@@ -21,7 +21,6 @@ namespace AgendaApi.API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> GetAll(CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(new GetAllSuperAdminRequest(), cancellationToken);

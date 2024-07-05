@@ -1,6 +1,6 @@
 ﻿namespace AgendaApi.Application.Shared.PasswordHashing
 {
-    public class PasswordHashingService
+    public static class PasswordHashingService
     {
         public static string Hash(string password) =>
             BCrypt.Net.BCrypt.HashPassword(password);

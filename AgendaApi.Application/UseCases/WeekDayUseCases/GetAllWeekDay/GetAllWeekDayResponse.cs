@@ -6,6 +6,6 @@ namespace AgendaApi.Application.UseCases.WeekDayUseCases.GetAllWeekDay
 {
     public sealed record GetAllWeekDayResponse : WeekDayBaseResponse
     {
-        public List<GetAllTimetablesResponse> Timetables { get; set; }
+        public List<GetAllTimetablesResponse>? Timetables { get; set; }
     }
 }

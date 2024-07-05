@@ -17,8 +17,8 @@ namespace AgendaApi.Application.UseCases.ScheduleUseCases.GetBlockScheduleInfo
         public async Task<GetBlockScheduleInfoResponse> Handle(GetBlockScheduleInfoRequest request,
             CancellationToken cancellationToken)
         {
-            var blockNaturalPerson = await _unitOfWork.NaturalPersonRepository.GetById(np => np.Name == "Bloqueio", cancellationToken);
-            var blockService = await _unitOfWork.ServiceRepository.GetById(s => s.LegalEntityId == request.legalEntityId && s.Name == "Bloqueio", cancellationToken);
+            var blockNaturalPerson = await _unitOfWork.NaturalPersonRepository!.GetById(np => np.Name == "Bloqueio", cancellationToken);
+            var blockService = await _unitOfWork.ServiceRepository!.GetById(s => s.LegalEntityId == request.legalEntityId && s.Name == "Bloqueio", cancellationToken);
             return new GetBlockScheduleInfoResponse
             {
                 blockService = _mapper.Map<GetServiceByName>(blockService),

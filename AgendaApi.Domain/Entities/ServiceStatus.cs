@@ -4,6 +4,6 @@
     {
         public int ServiceStatusId { get; set; }
         public string? StatusName { get; set; }
-        public ICollection<Service> Services { get; set; }
+        public ICollection<Service>? Services { get; set; }
     }
 }

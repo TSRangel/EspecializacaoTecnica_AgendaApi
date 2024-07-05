@@ -17,7 +17,7 @@ namespace AgendaApi.Application.UseCases.TimetableUseCases.GetAllTimetables
         public async Task<List<GetAllTimetablesResponse>> Handle(GetAllTimetablesRequest request, 
             CancellationToken cancellationToken)
         {
-            var timetables = await _unitOfWork.TimetableRepository.GetAllById(tt => tt.LegalEntityId == request.legalEntityId,cancellationToken);
+            var timetables = await _unitOfWork.TimetableRepository!.GetAllById(tt => tt.LegalEntityId == request.legalEntityId,cancellationToken);
             return _mapper.Map<List<GetAllTimetablesResponse>>(timetables);
         }
     }

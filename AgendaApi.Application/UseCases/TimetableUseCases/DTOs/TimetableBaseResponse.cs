@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace AgendaApi.Application.UseCases.TimetableUseCases.DTOs
@@ -19,7 +20,7 @@ namespace AgendaApi.Application.UseCases.TimetableUseCases.DTOs
         private const string TimeFormat = "HH:mm";
 
         public override TimeOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => TimeOnly.ParseExact(reader.GetString(), "HH:mm");
+            => TimeOnly.ParseExact(reader.GetString()!, "HH:mm", CultureInfo.InvariantCulture);
 
         public override void Write(Utf8JsonWriter writer, TimeOnly value, JsonSerializerOptions options)
         {

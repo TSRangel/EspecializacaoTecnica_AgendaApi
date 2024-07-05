@@ -9,7 +9,7 @@ namespace AgendaApi.Persistence.Repositories
     public class SuperAdminRepository : BaseRepository<SuperAdmin>, ISuperAdminRepository
     {
         public SuperAdminRepository(AgendaApiDbContext context) : base(context) { }
-        public async Task<SuperAdmin> GetByEmail(Expression<Func<SuperAdmin, bool>> predicate, CancellationToken cancellationToken)
+        public async Task<SuperAdmin?> GetByEmail(Expression<Func<SuperAdmin, bool>> predicate, CancellationToken cancellationToken)
         {
             return await Context.SuperAdmins.AsNoTracking().FirstOrDefaultAsync(predicate, cancellationToken);
         }

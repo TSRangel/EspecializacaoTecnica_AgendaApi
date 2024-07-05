@@ -5,6 +5,6 @@ namespace AgendaApi.Domain.Interfaces
 {
     public interface ILegalEntityRepository : IBaseRepository<LegalEntity>
     {
-        Task<LegalEntity> GetByEmail(Expression<Func<LegalEntity, bool>> predicate, CancellationToken cancellationToken);
+        Task<LegalEntity?> GetByEmail(Expression<Func<LegalEntity, bool>> predicate, CancellationToken cancellationToken);
     }
 }

@@ -20,7 +20,7 @@ namespace AgendaApi.Application.UseCases.LegalPersonUseCases.UpdateLegalEntity
         public async Task<UpdateLegalEntityResponse> Handle(UpdateLegalEntityRequest request,
             CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.LegalEntityRepository.GetById(le => le.LegalEntityId == request.id,
+            var entity = await _unitOfWork.LegalEntityRepository!.GetById(le => le.LegalEntityId == request.id,
                 cancellationToken);
             if (entity is null) throw new NotFoundException("Usuário não encontrado.");
 

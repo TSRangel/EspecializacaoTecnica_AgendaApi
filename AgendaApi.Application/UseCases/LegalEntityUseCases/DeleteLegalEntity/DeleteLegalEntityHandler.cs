@@ -20,7 +20,7 @@ namespace AgendaApi.Application.UseCases.LegalPersonUseCases.DeleteLegalEntity
         public async Task<DeleteLegalEntityResponse> Handle(DeleteLegalEntityRequest request,
             CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.LegalEntityRepository.GetById(
+            var entity = await _unitOfWork.LegalEntityRepository!.GetById(
                 le => le.LegalEntityId == request.Id, cancellationToken);
             if (entity is null) throw new NotFoundException("Usuário não encontrado.");
 

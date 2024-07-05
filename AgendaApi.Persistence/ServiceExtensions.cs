@@ -12,7 +12,7 @@ namespace AgendaApi.Persistence
         public static void ConfigurePersistenceApp(this IServiceCollection services,
             IConfiguration configuration)
         {
-            string connectionString = configuration.GetConnectionString("DefaultConnection");
+            string connectionString = configuration.GetConnectionString("DefaultConnection")!;
             services.AddDbContext<AgendaApiDbContext>(options =>
              options.UseSqlServer(connectionString, sqlOptions =>
              {

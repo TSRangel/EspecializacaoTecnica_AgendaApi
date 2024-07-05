@@ -19,7 +19,7 @@ namespace AgendaApi.Application.UseCases.ServiceStatusUsecases.CreateServiceStat
             CancellationToken cancellationToken)
         {
             var serviceStatus = _mapper.Map<ServiceStatus>(request);
-            _unitOfWork.ServiceStatusRepository.Create(serviceStatus);
+            _unitOfWork.ServiceStatusRepository!.Create(serviceStatus);
             await _unitOfWork.Commit(cancellationToken);
             return _mapper.Map<CreateServiceStatusResponse>(serviceStatus);
         }

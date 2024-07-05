@@ -20,7 +20,7 @@ namespace AgendaApi.Application.UseCases.LegalPersonUseCases.GetAllLegalEntity
         public async Task<List<GetAllLegalEntityResponse>> Handle(GetAllLegalEntityRequest request,
             CancellationToken cancellationToken)
         {
-            var entities = await _unitOfWork.LegalEntityRepository.GetAll(cancellationToken);
+            var entities = await _unitOfWork.LegalEntityRepository!.GetAll(cancellationToken);
             return _mapper.Map<List<GetAllLegalEntityResponse>>(entities);
         }
     }

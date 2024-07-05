@@ -11,6 +11,6 @@
         public ServiceStatus? ServiceStatus { get; set; }
         public Guid? LegalEntityId { get; set; }
         public LegalEntity? LegalEntity { get; set; }
-        public ICollection<Scheduling> Schedulings { get; set; }
+        public ICollection<Scheduling>? Schedulings { get; set; }
     }
 }

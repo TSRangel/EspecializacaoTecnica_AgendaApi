@@ -5,6 +5,6 @@ namespace AgendaApi.Application.UseCases.WeekDayUseCases.GetWeekDayById
 {
     public sealed record GetWeekDayByIdResponse : WeekDayBaseResponse
     {
-        public ICollection<GetAllTimetablesResponse> Timetables { get; set; }
+        public ICollection<GetAllTimetablesResponse>? Timetables { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace AgendaApi.Application.UseCases.NaturalPersonUseCases.DeleteNaturalPers
         public async Task<DeleteNaturalPersonResponse> Handle(DeleteNaturalPersonRequest request,
             CancellationToken cancellationToken)
         {
-            var naturalPerson = await _unitOfWork.NaturalPersonRepository.GetById(
+            var naturalPerson = await _unitOfWork.NaturalPersonRepository!.GetById(
                 np => np.NaturalPersonId ==request.id, cancellationToken);
             
             if (naturalPerson is null) throw new NotFoundException("Usuário não encontrado.");

@@ -18,7 +18,7 @@ namespace AgendaApi.Application.UseCases.ServiceStatusUsecases.UpdateServiceStat
         public async Task<UpdateServiceStatusResponse> Handle(UpdateServiceStatusRequest request,
             CancellationToken cancellationToken)
         {
-            var serviceStatus = await _unitOfWork.ServiceStatusRepository.GetById(ss => ss.ServiceStatusId == request.serviceStatusId, cancellationToken);
+            var serviceStatus = await _unitOfWork.ServiceStatusRepository!.GetById(ss => ss.ServiceStatusId == request.serviceStatusId, cancellationToken);
             if (serviceStatus is null) throw new NotFoundException("Status de serviço não encontrado.");
 
             _mapper.Map(request, serviceStatus);

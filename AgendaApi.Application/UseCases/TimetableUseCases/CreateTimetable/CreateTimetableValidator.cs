@@ -1,5 +1,6 @@
 ﻿using AgendaApi.Application.Shared.GlobalValidators;
 using FluentValidation;
+using System.Globalization;
 
 namespace AgendaApi.Application.UseCases.TimetableUseCases.CreateTimetable
 {
@@ -28,6 +29,6 @@ namespace AgendaApi.Application.UseCases.TimetableUseCases.CreateTimetable
         }
 
         private bool TimeOnlyValidFormat(TimeOnly time) => 
-            TimeOnly.TryParseExact(time.ToString(), "HH:mm", out _);
+            TimeOnly.TryParseExact(time.ToString(), "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
     }
 }

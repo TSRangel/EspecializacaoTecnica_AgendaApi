@@ -21,7 +21,7 @@ namespace AgendaApi.Application.UseCases.ServiceUseCase.CreateService
             CancellationToken cancellationToken)
         {
             var service = _mapper.Map<Service>(request);
-            _unitOfWork.ServiceRepository.Create(service);
+            _unitOfWork.ServiceRepository!.Create(service);
             await _unitOfWork.Commit(cancellationToken);
 
             return _mapper.Map<CreateServiceResponse>(service);

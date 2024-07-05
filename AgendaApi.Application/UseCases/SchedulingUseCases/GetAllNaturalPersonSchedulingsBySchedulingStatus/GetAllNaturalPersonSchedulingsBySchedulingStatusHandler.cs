@@ -19,7 +19,7 @@ namespace AgendaApi.Application.UseCases.SchedulingUseCases.GetAllNaturalPersonS
         public async Task<List<GetAllNaturalPersonSchedulingsBySchedulingStatusResponse>> Handle(GetAllNaturalPersonSchedulingsBySchedulingStatusRequest request,
             CancellationToken cancellationToken)
         {
-            var schedulings = await _unitOfWork.SchedulingRepository.GetAllByLegalEntityIdComplete(
+            var schedulings = await _unitOfWork.SchedulingRepository!.GetAllByLegalEntityIdComplete(
                 s => s.NaturalPersonId == request.naturalPersonId && s.SchedulingStatusId == request.schedulingStatusId, cancellationToken);
             if (schedulings is null) throw new NotFoundException("Não existe agendamentos com o estado o estado especificado para essa pessoa.");
 

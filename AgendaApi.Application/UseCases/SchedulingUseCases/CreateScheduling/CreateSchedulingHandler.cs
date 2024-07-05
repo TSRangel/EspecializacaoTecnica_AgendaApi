@@ -20,15 +20,15 @@ namespace AgendaApi.Application.UseCases.SchedulingUseCases.CreateScheduling
             CancellationToken cancellationToken)
         {
             int weekDayId = (int)request.schedulingDate.DayOfWeek + 1;
-            WeekDay weekDay = await _unitOfWork.WeekDayRepository.GetById(wd => wd.WeekDayId == weekDayId, cancellationToken);
-            Service service = await _unitOfWork.ServiceRepository.GetById(s => s.ServiceId == request.serviceId, cancellationToken);
-            IEnumerable<Scheduling> schedulings = await _unitOfWork.SchedulingRepository.GetAllByDate(
+            WeekDay? weekDay = await _unitOfWork.WeekDayRepository!.GetById(wd => wd.WeekDayId == weekDayId, cancellationToken);
+            Service? service = await _unitOfWork.ServiceRepository!.GetById(s => s.ServiceId == request.serviceId, cancellationToken);
+            IEnumerable<Scheduling> schedulings = await _unitOfWork.SchedulingRepository!.GetAllByDate(
                 s => s.SchedulingDate.Date == request.schedulingDate.Date && s.LegalEntityId == request.legalEntityId && s.SchedulingStatusId == 1, cancellationToken);
             TimeOnly schedulingStartTime = TimeOnly.FromDateTime(request.schedulingDate);
-            TimeOnly schedulingEndTime = schedulingStartTime.Add(service.Duration);
+            TimeOnly schedulingEndTime = schedulingStartTime.Add(service!.Duration);
             bool verificator = false;
 
-            foreach (var timetable in weekDay.Timetables)
+            foreach (var timetable in weekDay!.Timetables!)
             {
                 if (timetable.StartTime <= schedulingStartTime && timetable.EndTime > schedulingEndTime) verificator = true;
             }
@@ -37,9 +37,9 @@ namespace AgendaApi.Application.UseCases.SchedulingUseCases.CreateScheduling
 
             foreach (var scheduling in schedulings)
             {
-                if ((request.schedulingDate >= scheduling.SchedulingDate && request.schedulingDate < scheduling.SchedulingDate.Add(scheduling.Service.Duration)) ||
-                    (request.schedulingDate.Add(service.Duration) > scheduling.SchedulingDate && request.schedulingDate.Add(service.Duration) <= scheduling.SchedulingDate.Add(scheduling.Service.Duration)) ||
-                    request.schedulingDate <= scheduling.SchedulingDate && request.schedulingDate.Add(service.Duration) >= scheduling.SchedulingDate.Add(scheduling.Service.Duration))
+                if ((request.schedulingDate >= scheduling.SchedulingDate && request.schedulingDate < scheduling.SchedulingDate.Add(scheduling.Service!.Duration)) ||
+                    (request.schedulingDate.Add(service.Duration) > scheduling.SchedulingDate && request.schedulingDate.Add(service.Duration) <= scheduling.SchedulingDate.Add(scheduling.Service!.Duration)) ||
+                    request.schedulingDate <= scheduling.SchedulingDate && request.schedulingDate.Add(service.Duration) >= scheduling.SchedulingDate.Add(scheduling.Service!.Duration))
                 {
                     throw new BadRequestException("Horário solicitado conflita com outros agendamentos.");
                 }

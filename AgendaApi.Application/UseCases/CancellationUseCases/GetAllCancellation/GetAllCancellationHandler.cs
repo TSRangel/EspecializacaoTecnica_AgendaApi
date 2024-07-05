@@ -17,7 +17,7 @@ namespace AgendaApi.Application.UseCases.CancellationUseCase.GetAllCancellation
         public async Task<List<GetAllCancellationResponse>> Handle(GetAllCancellationRequest request,
             CancellationToken cancellationToken)
         {
-            var cancellations = await _unitOfWork.CancellationRepository.GetAll(cancellationToken);
+            var cancellations = await _unitOfWork.CancellationRepository!.GetAll(cancellationToken);
             return _mapper.Map<List<GetAllCancellationResponse>>(cancellations);
         }
     }

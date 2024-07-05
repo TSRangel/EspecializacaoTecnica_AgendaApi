@@ -17,7 +17,7 @@ namespace AgendaApi.Application.UseCases.TimetableUseCases.DeleteTimetable
         public async Task<List<DeleteTimetableResponse>> Handle(DeleteTimetableRequest request, 
             CancellationToken cancellationToken)
         {
-            var timetables = await _unitOfWork.TimetableRepository.Delete(cancellationToken);
+            var timetables = await _unitOfWork.TimetableRepository!.Delete(cancellationToken);
             await _unitOfWork.Commit(cancellationToken);
 
             return _mapper.Map<List<DeleteTimetableResponse>>(timetables);

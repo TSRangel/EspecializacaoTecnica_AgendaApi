@@ -5,7 +5,7 @@
         public static SecretsConfiguration Secrets { get; set; } = new();
         public class SecretsConfiguration
         {
-            public string JwtPrivateKey { get; set; }
+            public string? JwtPrivateKey { get; set; }
         }
     }
 }

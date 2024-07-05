@@ -18,7 +18,7 @@ namespace AgendaApi.Application.UseCases.SchedulingUseCases.GetSchedulingById
         public async Task<GetSchedulingByIdResponse> Handle(GetSchedulingByIdRequest request,
             CancellationToken cancellationToken)
         {
-            var scheduling = await _unitOfWork.SchedulingRepository.GetById(s => s.SchedulingId == request.id, cancellationToken);
+            var scheduling = await _unitOfWork.SchedulingRepository!.GetById(s => s.SchedulingId == request.id, cancellationToken);
             if (scheduling is null) throw new NotFoundException("Agendamento não encontrado.");
             return _mapper.Map<GetSchedulingByIdResponse>(scheduling);
         }

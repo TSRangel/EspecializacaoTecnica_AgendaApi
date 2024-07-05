@@ -40,14 +40,9 @@ namespace AgendaApi.Persistence.Repositories
             _schedulingRepository ?? new SchedulingRepository(_context);
         public ICancellationRepository CancellationRepository =>
             _cancellationRepository ?? new CancellationRepository(_context);
-        public async Task Commit(CancellationToken canellationToken)
+        public async Task Commit(CancellationToken cancellationToken)
         {
-            await _context.SaveChangesAsync(canellationToken);
-        }
-
-        public async Task Dispose()
-        {
-            await _context.DisposeAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

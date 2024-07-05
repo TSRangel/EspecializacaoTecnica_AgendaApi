@@ -27,7 +27,7 @@ namespace AgendaApi.Application.UseCases.NaturalPersonUseCases.CreateNaturalPers
 
             NaturalPerson naturalPerson = _mapper.Map<NaturalPerson>(request);
             naturalPerson.Password = PasswordHashingService.Hash(naturalPerson.Password!);
-            _unitOfWork.NaturalPersonRepository.Create(naturalPerson);
+            _unitOfWork.NaturalPersonRepository!.Create(naturalPerson);
             await _unitOfWork.Commit(cancellationToken);
 
             return _mapper.Map<CreateNaturalPersonResponse>(naturalPerson);

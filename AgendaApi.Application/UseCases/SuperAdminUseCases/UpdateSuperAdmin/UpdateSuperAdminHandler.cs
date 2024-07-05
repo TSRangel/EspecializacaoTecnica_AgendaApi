@@ -20,7 +20,7 @@ namespace AgendaApi.Application.UseCases.SuperAdminUseCases.UpdateSuperAdminn
         public async Task<UpdateSuperAdminResponse> Handle(UpdateSuperAdminRequest request,
             CancellationToken cancellationToken)
         {
-            var superAdmin = await _unitOfWork.SuperAdminRepository.GetById(
+            var superAdmin = await _unitOfWork.SuperAdminRepository!.GetById(
                 sa => sa.SuperAdminId == request.superAdminId, cancellationToken);
             if (superAdmin is null) throw new NotFoundException("Usuário não encontrado.");
 

@@ -20,7 +20,7 @@ namespace AgendaApi.Application.UseCases.SchedulingStatusUseCase.UpdateSchedulin
         {
             try
             {
-            var schedulingStatus = await _unitOfWork.SchedulingStatusRepository.GetById(ss => ss.SchedulingStatusId == request.schedulingStatusId, cancellationToken);
+            var schedulingStatus = await _unitOfWork.SchedulingStatusRepository!.GetById(ss => ss.SchedulingStatusId == request.schedulingStatusId, cancellationToken);
             if (schedulingStatus is null) throw new NotFoundException("Status de agendamento não encontrado.");
 
             _mapper.Map(request, schedulingStatus);

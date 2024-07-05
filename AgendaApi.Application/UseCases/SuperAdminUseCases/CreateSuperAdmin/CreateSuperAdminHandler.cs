@@ -22,7 +22,7 @@ namespace AgendaApi.Application.UseCases.SuperAdminUseCases.CreateSuperAdmin
         {
             var superAdmin = _mapper.Map<SuperAdmin>(request);
             superAdmin.Password = PasswordHashingService.Hash(superAdmin.Password!);
-            _unitOfWork.SuperAdminRepository.Create(superAdmin);
+            _unitOfWork.SuperAdminRepository!.Create(superAdmin);
             await _unitOfWork.Commit(cancellationToken);
 
             return _mapper.Map<CreateSuperAdminResponse>(superAdmin);

@@ -2,6 +2,6 @@
 {
     public abstract record WeekDayBaseResponse
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

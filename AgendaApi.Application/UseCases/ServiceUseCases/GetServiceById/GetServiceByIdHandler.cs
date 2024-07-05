@@ -21,7 +21,7 @@ namespace AgendaApi.Application.UseCases.ServiceUseCase.GetServiceById
         public async Task<GetServiceByIdResponse> Handle(GetServiceByIdRequest request,
             CancellationToken cancellationToken)
         {
-            var service = await _unitOfWork.ServiceRepository.GetById(s => s.ServiceId == request.id,
+            var service = await _unitOfWork.ServiceRepository!.GetById(s => s.ServiceId == request.id,
                 cancellationToken);
             if (service is null) throw new NotFoundException("Serviço não encontrado.");
 

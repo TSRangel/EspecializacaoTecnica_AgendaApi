@@ -18,7 +18,7 @@ namespace AgendaApi.Application.UseCases.SuperAdminUseCases.GetAllSuperAdmin
         public async Task<List<GetAllSuperAdminResponse>> Handle(GetAllSuperAdminRequest request,
             CancellationToken cancellationToken)
         {
-            var superAdmins = await _unitOfWork.SuperAdminRepository.GetAll(cancellationToken);
+            var superAdmins = await _unitOfWork.SuperAdminRepository!.GetAll(cancellationToken);
             return _mapper.Map<List<GetAllSuperAdminResponse>>(superAdmins);
         }
     }

@@ -32,7 +32,7 @@ namespace AgendaApi.Persistence.Repositories
         {
             return await Context.Set<T>().AsNoTracking().ToListAsync(cancellationToken);
         }
-        public async virtual Task<T> GetById(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
+        public async virtual Task<T?> GetById(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
         {
             return await Context.Set<T>().AsNoTracking().FirstOrDefaultAsync(predicate, cancellationToken);
         }

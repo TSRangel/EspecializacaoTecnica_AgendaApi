@@ -18,7 +18,7 @@ namespace AgendaApi.Application.UseCases.ServiceStatusUsecases.GetAllServiceStat
         public async Task<List<GetAllServiceStatusResponse>> Handle(GetAllServiceStatusRequest request,
             CancellationToken cancellationToken)
         {
-            var serviceStatus = await _unitOfWork.ServiceStatusRepository.GetAll(cancellationToken);
+            var serviceStatus = await _unitOfWork.ServiceStatusRepository!.GetAll(cancellationToken);
             if (serviceStatus is null) throw new NotFoundException("Status de serviços não encontrados.");
 
             return _mapper.Map<List<GetAllServiceStatusResponse>>(serviceStatus);

@@ -19,7 +19,7 @@ namespace AgendaApi.Application.UseCases.SchedulingUseCases.DeleteScheduling
         public async Task<CancelSchedulingResponse> Handle(CancelSchedulingRequest request,
             CancellationToken cancellationToken)
         {
-            var scheduling = await _unitOfWork.SchedulingRepository.GetById(s => s.SchedulingId == request.schedulingId, cancellationToken);
+            var scheduling = await _unitOfWork.SchedulingRepository!.GetById(s => s.SchedulingId == request.schedulingId, cancellationToken);
             if (scheduling is null || scheduling.SchedulingStatusId != 1) throw new BadRequestException("Somente agendamentos não finalizados podem ser cancelados.");
             
             scheduling.SchedulingStatusId = 4;
@@ -27,7 +27,7 @@ namespace AgendaApi.Application.UseCases.SchedulingUseCases.DeleteScheduling
 
             var cancellation = _mapper.Map<Cancellation>(request);
             cancellation.CancellationTime = DateTime.Now;
-            _unitOfWork.CancellationRepository.Create(cancellation);
+            _unitOfWork.CancellationRepository!.Create(cancellation);
             await _unitOfWork.Commit(cancellationToken);
 
             return _mapper.Map<CancelSchedulingResponse>(scheduling);

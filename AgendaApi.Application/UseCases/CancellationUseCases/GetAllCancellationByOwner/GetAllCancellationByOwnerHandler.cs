@@ -18,7 +18,7 @@ namespace AgendaApi.Application.UseCases.CancellationUseCase.GetAllCancellationB
         public async Task<List<GetAllCancellationByOwnerResponse>> Handle(GetAllCancellationByOwnerRequest request,
             CancellationToken cancellationToken)
         {
-            var cancellations = await _unitOfWork.CancellationRepository.GetAllByOwner(c => c.Owner == request.id, cancellationToken);
+            var cancellations = await _unitOfWork.CancellationRepository!.GetAllByOwner(c => c.Owner == request.id, cancellationToken);
             if (cancellations is null) throw new NotFoundException("Não existem cancelamentos realizados pelo usuário.");
             return _mapper.Map<List<GetAllCancellationByOwnerResponse>>(cancellations);
         }

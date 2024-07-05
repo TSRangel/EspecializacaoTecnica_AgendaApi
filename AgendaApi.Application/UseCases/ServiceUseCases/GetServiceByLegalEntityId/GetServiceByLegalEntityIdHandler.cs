@@ -18,7 +18,7 @@ namespace AgendaApi.Application.UseCases.ServiceUseCases.GetServiceByLegalEntity
         public async Task<List<GetServiceByLegalEntityIdResponse>> Handle(GetServiceByLegalEntityIdRequest request,
             CancellationToken cancellationToken)
         {
-            var services = await _unitOfWork.ServiceRepository.GetAllById(s => s.LegalEntityId == request.id && s.Name != "Bloqueio", cancellationToken);
+            var services = await _unitOfWork.ServiceRepository!.GetAllById(s => s.LegalEntityId == request.id && s.Name != "Bloqueio", cancellationToken);
             if (services is null) throw new NotFoundException("Pessoa selecionada não possui serviços cadastrados.");
             return _mapper.Map<List<GetServiceByLegalEntityIdResponse>>(services);
         }

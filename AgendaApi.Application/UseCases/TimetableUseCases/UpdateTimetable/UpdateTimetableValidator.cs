@@ -1,5 +1,6 @@
 ﻿using AgendaApi.Application.Shared.GlobalValidators;
 using FluentValidation;
+using System.Globalization;
 
 namespace AgendaApi.Application.UseCases.TimetableUseCases.UpdateTimetable
 {
@@ -22,6 +23,6 @@ namespace AgendaApi.Application.UseCases.TimetableUseCases.UpdateTimetable
                 .WithMessage("O identificador do dia da semana deve estar entre 1 e 7.");
         }
         private bool TimeOnlyValidFormat(TimeOnly time) =>
-            TimeOnly.TryParseExact(time.ToString(), "HH:mm", out _);
+            TimeOnly.TryParseExact(time.ToString(), "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
     }
 }

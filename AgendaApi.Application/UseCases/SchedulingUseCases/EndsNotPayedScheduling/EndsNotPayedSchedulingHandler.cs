@@ -18,7 +18,7 @@ namespace AgendaApi.Application.UseCases.SchedulingUseCases.EndsNotPayedScheduli
         public async Task<EndsNotPayedSchedulingResponse> Handle(EndsNotPayedSchedulingRequest request,
             CancellationToken cancellationToken)
         {
-            var scheduling = await _unitOfWork.SchedulingRepository.GetById(s => s.SchedulingId == request.schedulingId, cancellationToken);
+            var scheduling = await _unitOfWork.SchedulingRepository!.GetById(s => s.SchedulingId == request.schedulingId, cancellationToken);
             if (scheduling is null || scheduling.SchedulingStatusId != 1) throw new BadRequestException("Agendamentos cancelados não podem ser finalizados.");
 
             scheduling.SchedulingStatusId = 3;

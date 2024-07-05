@@ -20,7 +20,7 @@ namespace AgendaApi.Application.UseCases.ServiceUseCase.UpdateService
         public async Task<UpdateServiceResponse> Handle(UpdateServiceRequest request,
             CancellationToken cancellationToken)
         {
-            var service = await _unitOfWork.ServiceRepository.GetById(s => s.ServiceId == request.serviceId,
+            var service = await _unitOfWork.ServiceRepository!.GetById(s => s.ServiceId == request.serviceId,
                 cancellationToken);
 
             if (service is null) throw new NotFoundException("Serviço não encontrado.");

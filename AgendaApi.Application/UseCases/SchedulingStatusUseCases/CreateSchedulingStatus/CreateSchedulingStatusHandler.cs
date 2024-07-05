@@ -19,7 +19,7 @@ namespace AgendaApi.Application.UseCases.SchedulingStatusUseCase.CreateSchedulin
             CancellationToken cancellationToken)
         {
             var schedulingStatus = _mapper.Map<SchedulingStatus>(request);
-            _unitOfWork.SchedulingStatusRepository.Create(schedulingStatus);
+            _unitOfWork.SchedulingStatusRepository!.Create(schedulingStatus);
             await _unitOfWork.Commit(cancellationToken);
 
             return _mapper.Map<CreateSchedulingStatusResponse>(schedulingStatus);

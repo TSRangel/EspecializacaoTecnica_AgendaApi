@@ -17,7 +17,7 @@ namespace AgendaApi.Application.UseCases.WeekDayUseCases.GetAllWeekDay
         public async Task<List<GetAllWeekDayResponse>> Handle(GetAllWeekDayRequest request,
             CancellationToken cancellationToken)
         {
-            var weekDays = await _unitOfWork.WeekDayRepository.GetAllById(request.legalEntityId , cancellationToken);
+            var weekDays = await _unitOfWork.WeekDayRepository!.GetAllById(request.legalEntityId , cancellationToken);
             return _mapper.Map<List<GetAllWeekDayResponse>>(weekDays);
         }
     }

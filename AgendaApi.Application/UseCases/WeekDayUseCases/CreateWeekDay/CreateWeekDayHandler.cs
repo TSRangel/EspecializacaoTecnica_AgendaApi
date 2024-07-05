@@ -19,7 +19,7 @@ namespace AgendaApi.Application.UseCases.WeekDayUseCases.CreateWeekDay
             CancellationToken cancellationToken)
         {
             var weekDay = _mapper.Map<WeekDay>(request);
-            _unitOfWork.WeekDayRepository.Create(weekDay);
+            _unitOfWork.WeekDayRepository!.Create(weekDay);
             await _unitOfWork.Commit(cancellationToken);
 
             return _mapper.Map<CreateWeekDayResponse>(weekDay);

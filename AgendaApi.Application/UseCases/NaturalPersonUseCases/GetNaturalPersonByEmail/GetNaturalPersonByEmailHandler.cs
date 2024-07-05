@@ -21,7 +21,7 @@ namespace AgendaApi.Application.UseCases.NaturalPersonUseCases.GetNaturalPersonB
         public async Task<GetNaturalPersonByEmailResponse> Handle(GetNaturalPersonByEmailRequest request,
             CancellationToken cancellationToken)
         {
-            var naturalPerson = await _unitOfWork.NaturalPersonRepository.GetByEmail(np => np.Email == request.email, cancellationToken);
+            var naturalPerson = await _unitOfWork.NaturalPersonRepository!.GetByEmail(np => np.Email == request.email, cancellationToken);
             if (naturalPerson is null) throw new NotFoundException("Usuário não encontrado.");
 
             return _mapper.Map<GetNaturalPersonByEmailResponse>(naturalPerson);

@@ -19,7 +19,7 @@ namespace AgendaApi.Application.UseCases.SuperAdminUseCases.GetSuperAdminByEmail
         public async Task<GetSuperAdminByEmailResponse> Handle(GetSuperAdminByEmailRequest request,
             CancellationToken cancellationToken)
         {
-            var superAdmin = await _unitOfWork.SuperAdminRepository.GetById(sa => sa.Email == request.email,
+            var superAdmin = await _unitOfWork.SuperAdminRepository!.GetById(sa => sa.Email == request.email,
                 cancellationToken);
             if (superAdmin is null) throw new NotFoundException("Usuário não encontrado.");
 

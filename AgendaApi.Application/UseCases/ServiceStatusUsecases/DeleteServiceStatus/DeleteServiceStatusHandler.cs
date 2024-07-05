@@ -18,7 +18,7 @@ namespace AgendaApi.Application.UseCases.ServiceStatusUsecases.DeleteServiceStat
         public async Task<DeleteServiceStatusResponse> Handle(DeleteServiceStatusRequest request,
             CancellationToken cancellationToken)
         {
-            var serviceStatus = await _unitOfWork.ServiceStatusRepository.GetById(ss => ss.ServiceStatusId == request.serviceStatusId, cancellationToken);
+            var serviceStatus = await _unitOfWork.ServiceStatusRepository!.GetById(ss => ss.ServiceStatusId == request.serviceStatusId, cancellationToken);
             if (serviceStatus == null) throw new NotFoundException("Status de serviço não encontrado.");
 
             _unitOfWork.ServiceStatusRepository.Delete(serviceStatus);

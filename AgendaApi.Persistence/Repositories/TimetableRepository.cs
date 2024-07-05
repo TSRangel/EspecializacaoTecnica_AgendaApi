@@ -11,7 +11,7 @@ namespace AgendaApi.Persistence.Repositories
         public TimetableRepository(AgendaApiDbContext context) : base(context) { }
         public async Task<IEnumerable<Timetable>> Delete(CancellationToken cancellationToken)
         {
-            var timetables = await Context.Timetables.ToListAsync();
+            var timetables = await Context.Timetables.ToListAsync(cancellationToken);
             Context.Timetables.RemoveRange(timetables);
             return timetables;
         }

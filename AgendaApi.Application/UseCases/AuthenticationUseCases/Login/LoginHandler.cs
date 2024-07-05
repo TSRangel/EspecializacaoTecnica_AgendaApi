@@ -21,15 +21,15 @@ namespace AgendaApi.Application.UseCases.AuthenticationUseCases.Login
         public async Task<LoginResponse> Handle(LoginRequest request, 
             CancellationToken cancellationToken)
         {
-            var legalEntity = await _unitOfWork.LegalEntityRepository.GetByEmail(
+            var legalEntity = await _unitOfWork.LegalEntityRepository!.GetByEmail(
                 le => le.Email == request.email, cancellationToken);
             if (legalEntity is null) 
             {
-                var naturalPerson = await _unitOfWork.NaturalPersonRepository.GetByEmail(
+                var naturalPerson = await _unitOfWork.NaturalPersonRepository!.GetByEmail(
                     np => np.Email == request.email, cancellationToken);
                 if (naturalPerson is null)
                 {
-                    var superAdmin = await _unitOfWork.SuperAdminRepository.GetByEmail(
+                    var superAdmin = await _unitOfWork.SuperAdminRepository!.GetByEmail(
                         sa => sa.Email == request.email, cancellationToken);
                     if (superAdmin is null) throw new NotFoundException("Usuário não encontrado.");
                     

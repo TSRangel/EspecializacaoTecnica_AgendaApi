@@ -21,11 +21,11 @@ namespace AgendaApi.Application.UseCases.TimetableUseCases.CreateTimetable
             foreach (var request in requests.TimetableRequests)
             {
                 var timetable = _mapper.Map<Timetable>(request);
-                _unitOfWork.TimetableRepository.Create(timetable);
+                _unitOfWork.TimetableRepository!.Create(timetable);
             }
 
             await _unitOfWork.Commit(cancellationToken);
-            var timetables = await _unitOfWork.TimetableRepository.GetAll(cancellationToken);
+            var timetables = await _unitOfWork.TimetableRepository!.GetAll(cancellationToken);
             return _mapper.Map<List<CreateTimetableResponse>>(timetables);
         }
     }

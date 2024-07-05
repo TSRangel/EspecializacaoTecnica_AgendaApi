@@ -55,7 +55,7 @@ namespace AgendaApi.API
                                 Id="Bearer"
                             }
                         },
-                        new string[]{ }
+                        Array.Empty<string>()
                     }
                 });
                 c.CustomSchemaIds(type => type.ToString());

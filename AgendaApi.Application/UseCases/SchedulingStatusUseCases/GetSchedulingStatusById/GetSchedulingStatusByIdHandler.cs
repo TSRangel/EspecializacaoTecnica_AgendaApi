@@ -17,7 +17,7 @@ namespace AgendaApi.Application.UseCases.SchedulingStatusUseCase.GetSchedulingSt
         public async Task<GetSchedulingStatusByIdResponse> Handle(GetSchedulingStatusByIdRequest request, 
             CancellationToken cancellationToken)
         {
-            var schedulingStatus = await _unitOfWork.SchedulingStatusRepository.GetById(ss => ss.SchedulingStatusId == request.id, cancellationToken);
+            var schedulingStatus = await _unitOfWork.SchedulingStatusRepository!.GetById(ss => ss.SchedulingStatusId == request.id, cancellationToken);
             return _mapper.Map<GetSchedulingStatusByIdResponse>(schedulingStatus);
         }
     }

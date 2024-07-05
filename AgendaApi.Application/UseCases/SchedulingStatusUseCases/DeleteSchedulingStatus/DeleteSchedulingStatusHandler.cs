@@ -15,11 +15,11 @@ namespace AgendaApi.Application.UseCases.SchedulingStatusUseCase.DeleteSchedulin
             _mapper = mapper;
         }
         public async Task<DeleteSchedulingStatusResponse> Handle(DeleteSchedulingStatusRequest request, 
-            CancellationToken canellationToken)
+            CancellationToken cancellationToken)
         {
-            var schedulingStatus = await _unitOfWork.SchedulingStatusRepository.GetById(ss => ss.SchedulingStatusId == request.id, canellationToken);
-            _unitOfWork.SchedulingStatusRepository.Delete(schedulingStatus);
-            await _unitOfWork.Commit(canellationToken);
+            var schedulingStatus = await _unitOfWork.SchedulingStatusRepository!.GetById(ss => ss.SchedulingStatusId == request.id, cancellationToken);
+            _unitOfWork.SchedulingStatusRepository.Delete(schedulingStatus!);
+            await _unitOfWork.Commit(cancellationToken);
 
             return _mapper.Map<DeleteSchedulingStatusResponse>(schedulingStatus);
         }
